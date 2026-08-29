@@ -1,0 +1,101 @@
+import { useState, useEffect } from "react";
+import { fetchChatResponse } from "./api";
+import { OrbitProgress } from "react-loading-indicators";
+import {MoveUp,Square} from "lucide-react"
+import Loading from "./Loading"
+import "./App.css";
+import ReactMarkdown from "react-markdown";
+function App() {
+  const [question, setQuestion] = useState("");
+
+  const [loading, setLoading] = useState(false);
+  const [list, setList] = useState([
+    { question: "", response: "Hey there!, How can I help you?" },
+  ]);
+  localStorage.setItem("chatList", JSON.stringify(list));
+  const handleQuestionChange = (e) => {
+    setQuestion(e.target.value);
+  };
+const ValidateInput = question.trim() !== "";
+  const handleSendQuestion = async (e) => {
+    e.preventDefault();
+    setLoading(true);
+    try {
+      if (ValidateInput) {
+        const message = await fetchChatResponse(question);
+        setLoading(false);
+        setList((List) => [...List, { question, response: message }]);
+        setQuestion(""); // Clear the question input after sending
+      }
+      else {
+        setLoading(false);
+        alert("Please enter a question before sending.");
+      }
+    } catch (error) {
+      setLoading(false);
+      console.error("Error fetching chat response:", error);
+    }
+  };
+  useEffect(() => {
+    const storedList = localStorage.getItem("chatList");
+    if (storedList) {
+      setList(JSON.parse(storedList));
+    }
+  }, []);
+  return (
+    <div className="p-5 md:max-w-6xl mx-auto bg-white">
+       <h1 className="font-bold items-center mb-10">Chat With GPT</h1>
+      <div className="">
+        <div className="flex-col justify-between items-center">
+        <div className="h-135 overflow-y-auto hide-scrollbar">
+          {list.length > 0 && (
+            <div className="response-container">
+              {list.map((item, index) => (
+                <div key={index}>
+                  {item.question.length > 0 && (
+                    <div className="flex py-5 justify-end items-center">
+                      <p>{item.question}</p>
+                    </div>
+                  )}
+
+                  <div className="response">
+                    <p>
+                      <ReactMarkdown>{item.response}</ReactMarkdown>
+                    </p>
+                  </div>
+                </div>
+              ))}
+              {loading && (
+                <div className="flex justify-center items-center mt-5">
+                  <Loading />
+                </div>
+              )}
+            </div>
+          )}
+        </div>
+       
+        <div className="flex justify-between border rounded-2xl px-4 w-full gap-2 items-center mt-5">
+          <textarea
+            className="w-90 md:w-full border-none outline-none p-2 resize-none"
+            value={question}
+            onChange={handleQuestionChange}
+            placeholder="Ask me anything..."
+          />
+
+         <div className="flex w-20  h-15 rounded-2xl  justify-center items-center ml-1">
+           <button className={`bg-gray-900 text-white p-2 rounded ${ValidateInput ? 'hover:bg-gray-700 cursor-pointer' : 'opacity-50 cursor-not-allowed'}`} onClick={handleSendQuestion}>
+            {loading ? (
+              <Square size={20} />
+            ) : (
+              <MoveUp size={20} />
+            )}
+          </button>
+         </div>
+        </div>
+      </div>
+      </div>
+    </div>
+  );
+}
+
+export default App;
