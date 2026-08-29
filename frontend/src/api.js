@@ -7,12 +7,14 @@ async function fetchChatResponse(question, model) {
       },
       body: JSON.stringify({ question, model })
     });
-    if (!response.ok) {
-      throw new Error(`HTTP error! status: ${response.status}`);
-    }
     const data = await response.json();
+    
+    if (!response.ok) {
+      throw new Error(`${data.message}`);
+    }
     return data.message;
   } catch (error) {
+    console.error("Error fetching chat response:", error);
     return `Error fetching chat response: ${error.message}`;
   }
 }

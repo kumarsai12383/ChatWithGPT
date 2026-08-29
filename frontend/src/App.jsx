@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect,useRef } from "react";
 import { fetchChatResponse } from "./api";
 import { OrbitProgress } from "react-loading-indicators";
 import { MoveUp, Square } from "lucide-react";
@@ -6,6 +6,7 @@ import Loading from "./Loading";
 import "./App.css";
 import ReactMarkdown from "react-markdown";
 function App() {
+  const BottomRef = useRef(null);
   const [question, setQuestion] = useState("");
   const [loading, setLoading] = useState(false);
   const [model, setModel] = useState("gemini-3.6-flash");
@@ -49,8 +50,9 @@ function App() {
   };
 
   useEffect(() => {
+    BottomRef.current?.scrollIntoView({ behavior: "smooth" });
     localStorage.setItem("chatList", JSON.stringify(list));
-  }, [list]);
+  }, [list,loading]);
   return (
     <div className="p-5 md:max-w-6xl mx-auto bg-white">
       <h1 className="font-bold items-center mb-10">Chat With GPT</h1>
@@ -79,6 +81,7 @@ function App() {
                     <Loading />
                   </div>
                 )}
+                <div ref={BottomRef}></div>
               </div>
             )}
           </div>
