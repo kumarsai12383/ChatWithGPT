@@ -1,6 +1,6 @@
 async function fetchChatResponse(question, model) {
   try {
-    const response = await fetch(`https://chatwithgpt-i82p.onrender.com/api/chat`, {
+    const response = await fetch(`https://chatwithgpt-backend-cshegwhtd9b4hbcb.centralindia-01.azurewebsites.net/api/chat`, {
       method: 'post',
       headers: {
         'Content-Type': 'application/json'
