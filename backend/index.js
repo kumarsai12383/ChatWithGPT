@@ -12,7 +12,7 @@ app.post("/api/chat", async (req, res) => {
   console.log("1️⃣ Request received");
   try {
     const start = Date.now();
-    const selectedModel = req.body.model || "gemini-3.6-flash";
+    const selectedModel = req.body.model || "gemini-3.5-flash-lite";
     const question = req.body.question;
     console.log("2️⃣ Question received:", question);
     console.log("2️⃣ Selected model:", selectedModel);
@@ -25,6 +25,9 @@ app.post("/api/chat", async (req, res) => {
     console.error("Error processing request:", error);
     res.status(500).json({ message: "Error processing request, please try again later" });
   }
+});
+app.get("/api/health", (req, res) => {
+  res.send("Server is healthy and running!");
 });
 const PORT = process.env.PORT || 5000;
 app.listen(PORT, () => {
