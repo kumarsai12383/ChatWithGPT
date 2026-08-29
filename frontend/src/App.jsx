@@ -54,7 +54,7 @@ function App() {
     localStorage.setItem("chatList", JSON.stringify(list));
   }, [list, loading]);
   return (
-    <div className="p-5 md:max-w-6xl mx-auto bg-white">
+    <div className="p-5 max-w-[850px] mx-auto bg-white">
       <h1 className="font-bold items-center mb-10">Chat With GPT</h1>
       <div className="">
         <div className="flex-col justify-between items-center">
@@ -64,15 +64,15 @@ function App() {
                 {list.map((item, index) => (
                   <div key={index}>
                     {item.question.length > 0 && (
-                      <div className="flex py-5 justify-end items-center">
-                        <p>{item.question}</p>
+                      <div className="flex  py-5 justify-end items-center">
+                        <p className="bg-blue-100 rounded-2xl px-3 py-2 ">{item.question}</p>
                       </div>
                     )}
 
                     <div className="response">
-                      <p>
-                        <ReactMarkdown>{item.response}</ReactMarkdown>
-                      </p>
+                      <div className="markdown-response">
+                        <ReactMarkdown >{item.response}</ReactMarkdown>
+                      </div>
                     </div>
                   </div>
                 ))}
@@ -85,59 +85,66 @@ function App() {
               </div>
             )}
           </div>
-
-          <div className="px-8 pb-7 w-full fixed bottom-0 md:bottom-0 left-0 right-0 bg-white">
-            <select
-              name="model"
-              id="model"
-              value={model}
-              onChange={(e) => setModel(e.target.value)}
-              className="md:hidden w-30 text-md  md:w-50 border-none outline-none p-2 rounded-lg mb-2"
-            >
-              <option
-                value="gemini-3.5-flash-lite"
-                style={{ fontSize: "12px" }}
-                className="text-md"
+          <div className=" flex justify-center items-center">
+            <div className="px-8 pb-7 w-100 md:w-240  fixed bottom-0 md:bottom-0  bg-white">
+              <select
+                name="model"
+                id="model"
+                value={model}
+                onChange={(e) => setModel(e.target.value)}
+                className="md:hidden w-23 text-md   border outline-blue-400 p-3 rounded-3xl mb-2"
               >
-                Gemini 3.5 Flash Lite
-              </option>
-              <option
-                value="gemini-3.6-flash"
-                style={{ fontSize: "12px" }}
-                className="text-md"
-              >
-                Gemini 3.6 Flash
-              </option>
-            </select>
-            <select
-              name="model"
-              id="model"
-              value={model}
-              onChange={(e) => setModel(e.target.value)}
-              className="w-30 hidden md:block text-md  md:w-50 border-none outline-none p-2 rounded-lg mb-2"
-            >
-              <option value="gemini-3.5-flash-lite" className="text-md">
-                Gemini 3.5 Flash Lite
-              </option>
-              <option value="gemini-3.6-flash" className="text-md">
-                Gemini 3.6 Flash
-              </option>
-            </select>
-            <div className="flex justify-between border rounded-2xl ">
-              <textarea
-                className="w-90 md:w-full border-none outline-none p-2 resize-none"
-                value={question}
-                onChange={handleQuestionChange}
-                placeholder="Ask me anything..."
-              />
-
-              <div className="flex w-20  h-15 rounded-2xl  justify-center items-center ml-1">
-                <button
-                  className={`bg-gray-900 text-white p-2 rounded ${ValidateInput ? "hover:bg-gray-700 cursor-pointer" : "opacity-50 cursor-not-allowed"}`}
-                  onClick={handleSendQuestion}
+                <option value="gemini-3.5-flash-lite" style={{ fontSize: "12px",borderRadius: "9999px" }} className="text-white  rounded-full bg-blue-300">
+                 Model
+                </option>
+                <option
+                  value="gemini-3.5-flash-lite"
+                  style={{ fontSize: "12px" }}
+                  className="text-md"
                 >
-                  {loading ? <Square size={20} /> : <MoveUp size={20} />}
-                </button>
+                  Gemini 3.5 Flash Lite
+                </option>
+                <option
+                  value="gemini-3.6-flash"
+                  style={{ fontSize: "12px" }}
+                  className="text-md"
+                >
+                  Gemini 3.6 Flash
+                </option>
+              </select>
+              <select
+                name="model"
+                id="model"
+                value={model}
+                onChange={(e) => setModel(e.target.value)}
+                className=" hidden md:block text-md  md:w-50 border-none outline-none p-2 rounded-lg mb-2"
+              >
+                <option value="gemini-3.5-flash-lite" className="text-md">
+                 Model
+                </option>
+                <option value="gemini-3.5-flash-lite" className="text-md">
+                  Gemini 3.5 Flash Lite
+                </option>
+                <option value="gemini-3.6-flash" className="text-md">
+                  Gemini 3.6 Flash
+                </option>
+              </select>
+              <div className="flex justify-between border rounded-2xl ">
+                <textarea
+                  className="w-90 md:w-full border-none outline-none p-2 resize-none"
+                  value={question}
+                  onChange={handleQuestionChange}
+                  placeholder="Ask me anything..."
+                />
+
+                <div className="flex w-20  h-15 rounded-2xl  justify-center items-center ml-1">
+                  <button
+                    className={`bg-gray-900 text-white p-2 rounded-full ${ValidateInput ? "hover:bg-gray-700 cursor-pointer" : "opacity-50 cursor-not-allowed"}`}
+                    onClick={handleSendQuestion}
+                  >
+                    {loading ? <Square size={20} /> : <MoveUp size={20} />}
+                  </button>
+                </div>
               </div>
             </div>
           </div>

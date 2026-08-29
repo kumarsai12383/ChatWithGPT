@@ -1,0 +1,79 @@
+.markdown-response {
+    font-size: 16px;
+    line-height: 1.6;
+}
+
+.markdown-response h1 {
+    font-size: 28px;
+    margin: 20px 0 10px;
+}
+
+.markdown-response h2 {
+    font-size: 22px;
+    margin: 18px 0 8px;
+}
+
+.markdown-response h3 {
+    font-size: 18px;
+    margin: 16px 0 6px;
+}
+
+.markdown-response p {
+    margin: 8px 0;
+}
+
+.markdown-response strong {
+    font-weight: 700;
+}
+
+.markdown-response ul,
+.markdown-response ol {
+    margin: 10px 0;
+    padding-left: 25px;
+}
+
+.markdown-response li {
+    margin: 5px 0;
+}
+.markdown-response pre {
+    padding: 15px;
+    margin: 15px 0;
+    border-radius: 10px;
+    overflow-x: auto;
+    background: #f4f4f4;
+}
+
+.markdown-response code {
+    font-family: monospace;
+}
+
+.markdown-response :not(pre) > code {
+    padding: 2px 6px;
+    border-radius: 5px;
+    background: #eee;
+}
+.markdown-response blockquote {
+    margin: 15px 0;
+    padding: 8px 15px;
+    border-left: 4px solid #888;
+    background: #f7f7f7;
+}
+.markdown-response table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 15px 0;
+}
+
+.markdown-response th,
+.markdown-response td {
+    padding: 8px 12px;
+    border: 1px solid #ddd;
+    text-align: left;
+}
+
+.markdown-response th {
+    font-weight: 600;
+}
+.markdown-response a {
+    text-decoration: underline;
+}
