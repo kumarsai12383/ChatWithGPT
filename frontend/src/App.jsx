@@ -1,4 +1,4 @@
-import { useState, useEffect,useRef } from "react";
+import { useState, useEffect, useRef } from "react";
 import { fetchChatResponse } from "./api";
 import { OrbitProgress } from "react-loading-indicators";
 import { MoveUp, Square } from "lucide-react";
@@ -9,7 +9,7 @@ function App() {
   const BottomRef = useRef(null);
   const [question, setQuestion] = useState("");
   const [loading, setLoading] = useState(false);
-  const [model, setModel] = useState("gemini-3.6-flash");
+  const [model, setModel] = useState("gemini-3.5-flash-lite");
   const [list, setList] = useState(() => {
     const storedList = localStorage.getItem("chatList");
 
@@ -52,7 +52,7 @@ function App() {
   useEffect(() => {
     BottomRef.current?.scrollIntoView({ behavior: "smooth" });
     localStorage.setItem("chatList", JSON.stringify(list));
-  }, [list,loading]);
+  }, [list, loading]);
   return (
     <div className="p-5 md:max-w-6xl mx-auto bg-white">
       <h1 className="font-bold items-center mb-10">Chat With GPT</h1>
@@ -94,25 +94,33 @@ function App() {
               onChange={(e) => setModel(e.target.value)}
               className="md:hidden w-30 text-md  md:w-50 border-none outline-none p-2 rounded-lg mb-2"
             >
-              <option value="gemini-3.6-flash" style={{fontSize: "12px"}} className="text-md">
-                Gemini 3.6 Flash
-              </option>
-              <option value="gemini-3.5-flash-lite" style={{fontSize: "12px"}} className="text-md">
+              <option
+                value="gemini-3.5-flash-lite"
+                style={{ fontSize: "12px" }}
+                className="text-md"
+              >
                 Gemini 3.5 Flash Lite
               </option>
+              <option
+                value="gemini-3.6-flash"
+                style={{ fontSize: "12px" }}
+                className="text-md"
+              >
+                Gemini 3.6 Flash
+              </option>
             </select>
-             <select
+            <select
               name="model"
               id="model"
               value={model}
               onChange={(e) => setModel(e.target.value)}
               className="w-30 hidden md:block text-md  md:w-50 border-none outline-none p-2 rounded-lg mb-2"
             >
-              <option value="gemini-3.6-flash"  className="text-md">
-                Gemini 3.6 Flash
-              </option>
               <option value="gemini-3.5-flash-lite" className="text-md">
                 Gemini 3.5 Flash Lite
+              </option>
+              <option value="gemini-3.6-flash" className="text-md">
+                Gemini 3.6 Flash
               </option>
             </select>
             <div className="flex justify-between border rounded-2xl ">
