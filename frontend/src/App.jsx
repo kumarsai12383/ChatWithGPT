@@ -87,6 +87,8 @@ function App() {
             <select
               name="model"
               id="model"
+              value={model}
+              onChange={(e) => setModel(e.target.value)}
               className="md:hidden w-30 text-md  md:w-50 border-none outline-none p-2 rounded-lg mb-2"
             >
               <option value="gemini-3.6-flash" style={{fontSize: "12px"}} className="text-md">
