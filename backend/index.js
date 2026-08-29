@@ -6,7 +6,13 @@ const app = express();
 dotenv.config();
 //middlewares
 app.use(express.json());
-app.use(cors());
+app.use(
+  cors({
+    origin: "https://chat-with-gpt-lyart.vercel.app/", // Allow requests from any origin
+    methods: ["GET", "POST"], // Allow only GET and POST methods
+    allowedHeaders: ["Content-Type"], // Allow only specific headers
+  }),
+);
 
 app.post("/api/chat", async (req, res) => {
   try {
@@ -22,7 +28,5 @@ app.post("/api/chat", async (req, res) => {
 const PORT = process.env.PORT || 5000;
 app.listen(PORT, () => {
   console.log(`Server is running http://localhost:${PORT}`);
-  console.log(
-    "Hello this is Gemini, How can I help you?",
-  );
+  console.log("Hello this is Gemini, How can I help you?");
 });
