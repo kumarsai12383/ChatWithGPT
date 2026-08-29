@@ -6,13 +6,7 @@ const app = express();
 dotenv.config();
 //middlewares
 app.use(express.json());
-app.use(
-  cors({
-    origin: "https://chat-with-gpt-lyart.vercel.app/", // Allow requests from any origin
-    methods: ["GET", "POST"], // Allow only GET and POST methods
-    allowedHeaders: ["Content-Type"], // Allow only specific headers
-  }),
-);
+app.use(cors());
 
 app.post("/api/chat", async (req, res) => {
   try {
