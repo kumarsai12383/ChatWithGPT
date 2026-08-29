@@ -111,7 +111,7 @@ const models = [
                 id="model"
                 value={model}
                 onChange={(e) => setModel(e.target.value)}
-                className="md:hidden w-23 text-md   border outline-blue-400 p-3 rounded-3xl mb-2"
+                className="md:hidden w-40 text-md   border outline-blue-400 p-3 rounded-3xl mb-2"
               >
                 {models.map((modelOption) => (
                   <option key={modelOption.id} value={modelOption.id} className="text-md">
