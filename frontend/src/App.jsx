@@ -1,6 +1,6 @@
 import { useState, useEffect, useRef } from "react";
 import { fetchChatResponse } from "./api";
-import { OrbitProgress } from "react-loading-indicators";
+
 import { MoveUp, Square } from "lucide-react";
 import Loading from "./Loading";
 import "./App.css";
@@ -14,7 +14,8 @@ function App() {
     const storedList = localStorage.getItem("chatList");
 
     if (storedList) {
-      return JSON.parse(storedList);
+      const filtered = JSON.parse(storedList).filter((item) => item.response !== "Error fetching chat response: Error processing request, please try again later");
+      return filtered;
     }
 
     return [
@@ -45,7 +46,28 @@ function App() {
       console.error("Error fetching chat response:", error);
     }
   };
-
+const models = [
+  {
+    name: "Gemini 3.7 Flash",
+    id: "gemini-3.7-flash"
+  },
+  {
+    name: "Gemini 3.6 Flash",
+    id: "gemini-3.6-flash"
+  },
+  {
+    name: "Gemini 3.5 Flash",
+    id: "gemini-3.5-flash"
+  },
+  {
+    name: "Gemini 3.5 Flash Lite",
+    id: "gemini-3.5-flash-lite"
+  },
+  {
+    name: "Gemini 3.1 Flash Lite",
+    id: "gemini-3.1-flash-lite"
+  }
+];
   useEffect(() => {
     BottomRef.current?.scrollIntoView({ behavior: "smooth" });
     localStorage.setItem("chatList", JSON.stringify(list));
@@ -91,23 +113,11 @@ function App() {
                 onChange={(e) => setModel(e.target.value)}
                 className="md:hidden w-23 text-md   border outline-blue-400 p-3 rounded-3xl mb-2"
               >
-                <option value="gemini-3.5-flash-lite" style={{ fontSize: "12px",borderRadius: "9999px" }} className="text-white  rounded-full bg-blue-300">
-                 Model
-                </option>
-                <option
-                  value="gemini-3.5-flash-lite"
-                  style={{ fontSize: "12px" }}
-                  className="text-md"
-                >
-                  Gemini 3.5 Flash Lite
-                </option>
-                <option
-                  value="gemini-3.6-flash"
-                  style={{ fontSize: "12px" }}
-                  className="text-md"
-                >
-                  Gemini 3.6 Flash
-                </option>
+                {models.map((modelOption) => (
+                  <option key={modelOption.id} value={modelOption.id} className="text-md">
+                    {modelOption.name}
+                  </option>
+                ))}
               </select>
               <select
                 name="model"
@@ -116,15 +126,11 @@ function App() {
                 onChange={(e) => setModel(e.target.value)}
                 className=" hidden md:block text-md  md:w-50 border-none outline-none p-2 rounded-lg mb-2"
               >
-                <option value="gemini-3.5-flash-lite" className="text-md">
-                 Model
-                </option>
-                <option value="gemini-3.5-flash-lite" className="text-md">
-                  Gemini 3.5 Flash Lite
-                </option>
-                <option value="gemini-3.6-flash" className="text-md">
-                  Gemini 3.6 Flash
-                </option>
+                {models.map((modelOption) => (
+                  <option key={modelOption.id} value={modelOption.id} className="text-md">
+                    {modelOption.name}
+                  </option>
+                ))}
               </select>
               <div className="flex justify-between border rounded-2xl ">
                 <textarea
