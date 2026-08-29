@@ -83,7 +83,7 @@ function App() {
             )}
           </div>
 
-          <div className="p-10 w-full fixed bottom-10 md:bottom-0 left-0 right-0">
+          <div className="p-10 w-full fixed bottom-0 md:bottom-0 left-0 right-0">
             <select
               name="model"
               id="model"
