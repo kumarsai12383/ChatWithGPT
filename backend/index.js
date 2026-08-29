@@ -4,9 +4,10 @@ const { main } = require("./chat");
 const cors = require("cors");
 const app = express();
 dotenv.config();
+app.use(cors());
 //middlewares
 app.use(express.json());
-app.use(cors());
+
 
 app.post("/api/chat", async (req, res) => {
   console.log("1️⃣ Request received");
