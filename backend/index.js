@@ -4,10 +4,15 @@ const { main } = require("./chat");
 const cors = require("cors");
 const app = express();
 dotenv.config();
-app.use(cors());
+app.use(
+  cors({
+    origin: "https://chat-with-gpt-lyart.vercel.app/",
+    methods: ["GET", "POST"],
+    allowedHeaders: ["Content-Type"],
+  }),
+);
 //middlewares
 app.use(express.json());
-
 
 app.post("/api/chat", async (req, res) => {
   console.log("1️⃣ Request received");
@@ -24,7 +29,9 @@ app.post("/api/chat", async (req, res) => {
     console.log("4️⃣ Response sent");
   } catch (error) {
     console.error("Error processing request:", error);
-    res.status(500).json({ message: "Error processing request, please try again later" });
+    res
+      .status(500)
+      .json({ message: "Error processing request, please try again later" });
   }
 });
 app.get("/api/health", (req, res) => {
