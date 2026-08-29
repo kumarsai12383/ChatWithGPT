@@ -33,16 +33,13 @@ function App() {
     e.preventDefault();
     setLoading(true);
     try {
-      if (ValidateInput) {
+     
         const message = await fetchChatResponse(question, model);
         setLoading(false);
         setList((List) => [...List, { question, response: message }]);
 
         setQuestion(""); // Clear the question input after sending
-      } else {
-        setLoading(false);
-        alert("Please enter a question before sending.");
-      }
+       
     } catch (error) {
       setLoading(false);
       console.error("Error fetching chat response:", error);
@@ -141,6 +138,7 @@ function App() {
                   <button
                     className={`bg-gray-900 text-white p-2 rounded-full ${ValidateInput ? "hover:bg-gray-700 cursor-pointer" : "opacity-50 cursor-not-allowed"}`}
                     onClick={handleSendQuestion}
+                    disabled={!ValidateInput || loading}
                   >
                     {loading ? <Square size={20} /> : <MoveUp size={20} />}
                   </button>
