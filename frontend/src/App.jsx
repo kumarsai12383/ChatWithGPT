@@ -56,7 +56,7 @@ function App() {
       <h1 className="font-bold items-center mb-10">Chat With GPT</h1>
       <div className="">
         <div className="flex-col justify-between items-center">
-          <div className="overflow-y-auto hide-scrollbar">
+          <div className="h-120 overflow-y-auto hide-scrollbar">
             {list.length > 0 && (
               <div className="response-container">
                 {list.map((item, index) => (
@@ -83,7 +83,7 @@ function App() {
             )}
           </div>
 
-          <div className="p-10 w-full fixed bottom-0 md:bottom-0 left-0 right-0 bg-white">
+          <div className="px-8 pb-7 w-full fixed bottom-0 md:bottom-0 left-0 right-0 bg-white">
             <select
               name="model"
               id="model"

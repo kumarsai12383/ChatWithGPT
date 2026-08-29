@@ -20,10 +20,10 @@ app.post("/api/chat", async (req, res) => {
     const response = await main(question, selectedModel);
     console.log("3️⃣ Gemini finished:", Date.now() - start, "ms");
     res.status(200).json({ message: response });
-     console.log("4️⃣ Response sent");
+    console.log("4️⃣ Response sent");
   } catch (error) {
     console.error("Error processing request:", error);
-    res.status(500).send("Error processing request");
+    res.status(500).json({ message: "Error processing request, please try again later" });
   }
 });
 const PORT = process.env.PORT || 5000;
