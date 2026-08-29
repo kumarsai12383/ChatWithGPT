@@ -14,7 +14,7 @@ function App() {
     const storedList = localStorage.getItem("chatList");
 
     if (storedList) {
-      const filtered = JSON.parse(storedList).filter((item) => item.response !== "Error fetching chat response: Error processing request, please try again later");
+      const filtered = JSON.parse(storedList).filter((item) => item.response !== "Error fetching chat response: Error processing request, please try again later" || item.response !== "Error fetching chat response: Failed to fetch");
       return filtered;
     }
 
