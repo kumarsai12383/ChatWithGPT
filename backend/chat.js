@@ -5,9 +5,9 @@ const GEMINI_API_KEY = process.env.GEMINI_API_KEY;
 
 const ai = new GoogleGenAI({apiKey: GEMINI_API_KEY});
 
-async function main(question) {
+async function main(question, model) {
   const response = await ai.models.generateContent({
-    model: 'gemini-3.6-flash',
+    model: model,
     contents: question,
   });
   return response.text;

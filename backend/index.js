@@ -12,10 +12,12 @@ app.post("/api/chat", async (req, res) => {
   console.log("1️⃣ Request received");
   try {
     const start = Date.now();
+    const selectedModel = req.body.model || "gemini-3.6-flash";
     const question = req.body.question;
     console.log("2️⃣ Question received:", question);
+    console.log("2️⃣ Selected model:", selectedModel);
     console.log("2️⃣ Calling Gemini...");
-    const response = await main(question);
+    const response = await main(question, selectedModel);
     console.log("3️⃣ Gemini finished:", Date.now() - start, "ms");
     res.status(200).json({ message: response });
      console.log("4️⃣ Response sent");
