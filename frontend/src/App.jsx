@@ -74,7 +74,7 @@ const models = [
   }, [list, loading]);
   return (
     <div className="p-5 max-w-[850px] mx-auto bg-white">
-      <h1 className="font-bold items-center mb-10">Chat With GPT</h1>
+      <h1 className="font-bold items-center mb-10">ChatWithGPT</h1>
       <div className="">
         <div className="flex-col justify-between items-center">
           <div className="h-120 overflow-y-auto hide-scrollbar">
@@ -84,7 +84,7 @@ const models = [
                   <div key={index}>
                     {item.question.length > 0 && (
                       <div className="flex  py-5 justify-end items-center">
-                        <p className="bg-blue-100 rounded-2xl px-3 py-2 ">{item.question}</p>
+                        <p className="bg-gray-200 rounded-r-2xl rounded-t-2xl rounded- px-2 py-2 ">{item.question}</p>
                       </div>
                     )}
 
