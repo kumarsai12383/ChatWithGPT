@@ -15,7 +15,8 @@ function App() {
 
     if (storedList) {
       const filtered = JSON.parse(storedList).filter((item) => item.response !== "Error fetching chat response: Error processing request, please try again later" );
-      return filtered;
+      const finalFiltered = filtered.filter((item) => item.response !== "Error fetching chat response: Failed to fetch" );
+      return finalFiltered;
     }
 
     return [
