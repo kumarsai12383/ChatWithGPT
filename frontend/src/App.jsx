@@ -26,7 +26,7 @@ function App() {
       },
     ];
   });
-  localStorage.setItem("chatList", JSON.stringify(list));
+  
   const handleQuestionChange = (e) => {
     setQuestion(e.target.value);
   };
@@ -40,7 +40,7 @@ function App() {
         console.log("Sending question:", sendingQuestion);
         const message = await fetchChatResponse(sendingQuestion, model);
         setLoading(false);
-        setList((List) => [...List, { question, response: message }]);
+        setList((List) => [...List, { question: sendingQuestion, response: message }]);
 
         setQuestion(""); // Clear the question input after sending
        
@@ -145,7 +145,7 @@ const models = [
 
                 <div className="flex w-20  h-15 rounded-2xl  justify-center items-center ml-1">
                   <button
-                    className={`bg-gray-900 text-white p-2 rounded-full ${ValidateInput ? "hover:bg-gray-700 cursor-pointer" : "opacity-50 cursor-not-allowed"}`}
+                    className={`bg-gray-900 text-white p-2 rounded-full ${ValidateInput  ? "hover:bg-gray-700 cursor-pointer" : "opacity-50 cursor-not-allowed"}`}
                     onClick={handleSendQuestion}
                     disabled={!ValidateInput || loading}
                   >
