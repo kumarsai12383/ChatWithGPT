@@ -35,8 +35,10 @@ function App() {
     e.preventDefault();
     setLoading(true);
     try {
-     
-        const message = await fetchChatResponse(question, model);
+        const sendingQuestion = question.trim();
+        setQuestion(""); // Clear the question input immediately after sending
+        console.log("Sending question:", sendingQuestion);
+        const message = await fetchChatResponse(sendingQuestion, model);
         setLoading(false);
         setList((List) => [...List, { question, response: message }]);
 
