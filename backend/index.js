@@ -45,7 +45,7 @@ app.post("/api/chat", async (req, res) => {
       .json({ message: "Error processing request, please try again later" });
   }
 });
-app.get("/api/health", (req, res) => {
+app.get("/", (req, res) => {
   res.send("Server is healthy and running!");
 });
 const PORT = process.env.PORT || 5000;

@@ -1,6 +1,6 @@
 async function fetchChatResponse(question, model) {
   try {
-    const response = await fetch(`chat-with-gpt-g2adajhydab2dwdb.centralindia-01.azurewebsites.net/api/chat`, {
+    const response = await fetch(`http://chat-with-gpt-g2adajhydab2dwdb.centralindia-01.azurewebsites.net/api/chat`, {
       method: 'post',
       headers: {
         'Content-Type': 'application/json'
