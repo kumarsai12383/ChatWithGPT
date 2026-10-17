@@ -1,6 +1,6 @@
 const express = require("express");
 const dotenv = require("dotenv");
-const { main } = require("./chat");
+const  main  = require("./chat");
 const cors = require("cors");
 const app = express();
 dotenv.config();

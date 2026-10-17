@@ -14,4 +14,4 @@ async function main(question, model) {
   
 }
 
-module.exports =  {main} ;
+module.exports =  main ;
